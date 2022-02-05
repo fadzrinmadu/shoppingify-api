@@ -22,7 +22,7 @@ exports.addProduct = async (payload) => {
 };
 
 exports.getProducts = async (filters) => {
-  const { terms } = filters;
+  const { terms = '' } = filters;
   
   const products = Product.aggregate([
     {

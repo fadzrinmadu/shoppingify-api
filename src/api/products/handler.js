@@ -1,5 +1,4 @@
 const fs = require('fs');
-const path = require('path');
 const productService = require('./service');
 const { mapProductsModel } = require('../../utils');
 
@@ -24,7 +23,10 @@ exports.postProductsHandler = async (request, response, next) => {
 
     return response.status(201).end();
   } catch (error) {
-    fs.unlinkSync(path.join(`public/uploads/products/${request.file.filename}`));
+    if (request.file && request.file.path) {
+      fs.unlinkSync(request.file.path);
+    }
+
     return next(error);
   }
 };
@@ -66,7 +68,7 @@ exports.deleteProductByIdHandler = async (request, response, next) => {
     
     return response.status(200).json({
       status: 'success',
-      data: `Product with id '${id}' has been deleted`,
+      message: `Product with id '${id}' has been deleted`,
     });
   } catch (error) {
     return next(error);
