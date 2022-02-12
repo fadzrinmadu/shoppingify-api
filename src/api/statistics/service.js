@@ -29,7 +29,7 @@ exports.getStatisticsByDate = async (startDate, endDate) => {
     },
     {
       $group: {
-        _id: '$items._id',
+        _id: '$items.name',
         name: { $first: '$items.name' },
         value: { $sum: 1 },
       },
@@ -65,7 +65,7 @@ exports.getStatisticsByDate = async (startDate, endDate) => {
     },
     {
       $group: {
-        _id: '$items._id',
+        _id: '$items.category',
         category: { $first: '$items.category' },
         value: { $sum: 1 },
       },
