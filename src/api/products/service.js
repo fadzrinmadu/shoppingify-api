@@ -24,7 +24,7 @@ exports.addProduct = async (payload) => {
 exports.getProducts = async (filters) => {
   const { terms = '' } = filters;
   
-  const products = Product.aggregate([
+  const products = await Product.aggregate([
     {
       $match: { name: { $regex: terms, $options: 'i' } },
     },
@@ -53,7 +53,7 @@ exports.getProducts = async (filters) => {
 exports.getProductById = async (id) => {
   await checkProductById(id);
   
-  const product = Product.aggregate([
+  const product = await Product.aggregate([
     {
       $match: { _id: mongoose.Types.ObjectId(id) },
     },

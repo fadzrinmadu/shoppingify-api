@@ -4,13 +4,18 @@ const express = require('express');
 const database = require('./database');
 const ClientError = require('./exceptions/ClientError');
 const productsRouter =  require('./api/products/router');
+const ordersRouter =  require('./api/orders/router');
+const statisticsRouter = require('./api/statistics/router');
 
 const app = express();
 const port = process.env.PORT;
 
+app.use(express.json());
 app.use(express.static('public'));
 
 app.use('/api/v1/products', productsRouter);
+app.use('/api/v1/orders', ordersRouter);
+app.use('/api/v1/statistics', statisticsRouter);
 
 database.on('open', () => {
   app.listen(port, () => {

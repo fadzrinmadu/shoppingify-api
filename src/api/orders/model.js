@@ -4,6 +4,7 @@ const schema = mongoose.Schema({
   items: [{
     _id: mongoose.Types.ObjectId,
     name: String,
+    category: String,
     image: String,
     amount: Number,
     sellingPrice: Number,
@@ -22,7 +23,7 @@ const schema = mongoose.Schema({
       type: Number,
     },
   },
-  grandTotal: String,
+  grandTotal: Number,
   cash: Number,
   status: String,
   createdAt: Date,
